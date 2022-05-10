@@ -14,10 +14,12 @@ def getallnews():
     quantity = req.get("quantity",None)
 
     if startNumber is None:
-        abort(404,"falta startNumber")
+        res = make_response({"mensagem":'falta startNumber'},404)
+        return res
 
     if quantity is None:
-        abort(404,'falta quantity')
+        res = make_response({"mensagem":'falta quantity'},404)
+        return res
 
     allnews = getAllNews(startNumber,quantity)
     res = make_response(jsonify(allnews),200)
@@ -32,13 +34,16 @@ def getallnewsbycategory():
     categoria = req.get("categoria",None)
 
     if startNumber is None:
-        abort(404,"falta startNumber")
+        res = make_response({"mensagem":'falta startNumber'},404)
+        return res
 
     if quantity is None:
-        abort(404,'falta quantity')
+        res = make_response({"mensagem":'falta quantity'},404)
+        return res
 
     if categoria is None:
-        abort(404,'falta categoria')
+        res = make_response({"mensagem":'falta categoria'},404)
+        return res
 
     allnews = getNewsFromASpecitifCategory(categoria,startNumber,quantity)
     res = make_response(jsonify(allnews),200)
@@ -51,7 +56,8 @@ def getnews():
     id = request.args.get("id",None)
 
     if id is None:
-        abort(404, "Falta id")
+        res = make_response({"mensagem":'falta id'},404)
+        return res
 
     news = getNews(id)
     res = make_response(jsonify(news),200)
@@ -68,19 +74,24 @@ def createnews():
     conteudo = req.get('conteudo',None)
 
     if titulo is None:
-        abort(404,"falta titulo")
+        res = make_response({"mensagem":'falta titulo'},404)
+        return res
 
     if categoria is None:
-        abort(404,"falta categoria")
+        res = make_response({"mensagem":'falta categoria'},404)
+        return res
 
     if resumo is None:
-        abort(404,"falta resumo")
+        res = make_response({"mensagem":'falta resumo'},404)
+        return res
 
     if conteudo is None:
-        abort(404,"falta conteudo")
+        res = make_response({"mensagem":'falta conteudo'},404)
+        return res
 
     if assunto is None:
-        abort(404,"falta assunto")
+        res = make_response({"mensagem":'falta assunto'},404)
+        return res
 
     newsCreated = createNews(titulo,categoria,resumo,assunto,conteudo)
     res = make_response(jsonify(newsCreated),200)
@@ -98,23 +109,28 @@ def editnews():
     assunto = req.get("assunto",None)
 
     if id is None:
-        abort(404,"falta id")
+        res = make_response({"mensagem":'falta id'},404)
+        return res
 
     if titulo is None:
-        abort(404,"falta titulo")
+        res = make_response({"mensagem":'falta titulo'},404)
+        return res
 
     if categoria is None:
-        abort(404,"falta categoria")
+        res = make_response({"mensagem":'falta categoria'},404)
+        return res
 
     if resumo is None:
-        abort(404,"falta resumo")
+        res = make_response({"mensagem":'falta resumo'},404)
+        return res
 
     if conteudo is None:
-        abort(404,"falta conteudo")
-
+        res = make_response({"mensagem":'falta conteudo'},404)
+        return res
 
     if assunto is None:
-        abort(404,"falta assunto")
+        res = make_response({"mensagem":'falta assunto'},404)
+        return res
 
     newsEdited = editNews(id,titulo,categoria,resumo,assunto,conteudo)
     res = make_response(jsonify(newsEdited),200)
@@ -126,7 +142,8 @@ def deletenews():
     id = request.args.get("id",None)
 
     if id is None:
-        abort(404, "Falta id")
+        res = make_response({"mensagem":'falta id'},404)
+        return res
 
     newsDeleted = deleteNews(id)
     res = make_response(jsonify(newsDeleted),200)
