@@ -11,24 +11,30 @@ Essa é a versão do usuario em que qualquer um pode ler as noticias.
 2. Abrir mysql client do MariaDb
 
 3. Criar database "db1"
-create database db1;
+
+`create database db1;`
 
 ## Passos no projeto
 
 1. Instalar virtualenv
-pip install virtualenv
+
+`pip install virtualenv`
 
 2. Criar ambiente do virtualenv
-virtualenv myenv
+
+`virtualenv myenv`
 
 3. Ativar virtualenv
-.\myenv\Scripts\activate
+
+`.\myenv\Scripts\activate`
 
 4. Instalar dependencias
-pip install -r requirements.txt
+
+`pip install -r requirements.txt`
 
 5. Rodar app
-python server.py
+
+`python server.py`
 
 # Requisitos Técnicos
 
