@@ -8,11 +8,10 @@ Base = declarative_base()
 class Adm(Base):
     __tablename__='adm'
     id = Column(Integer, primary_key=True)
-    username = Column(String(255),nullable=False)
+    username = Column(String(255),nullable=False, unique=True )
     password = Column(String(255),nullable=False)
 
     def __init__(self, username=None,password=None):
-        self.titulo = titulo
         self.username = username
         self.password=password
 

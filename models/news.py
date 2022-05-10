@@ -22,7 +22,8 @@ class News(Base):
         self.assunto = assunto
 
     def __repr__(self):
-        return "News(%r, %r, %r, %r)" % (self.titulo,self.categoria, self.assunto, self.resumo,self.conteudo)
+        return (f'News({self.id},{self.titulo},{self.resumo},{self.categoria},{self.assunto})')
+
 
 
 Base.metadata.create_all(engine)
