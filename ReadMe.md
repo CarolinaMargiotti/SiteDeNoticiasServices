@@ -1,5 +1,3 @@
-https://mariadb.com/resources/blog/using-sqlalchemy-with-mariadb-connector-python-part-1/
-
 # SiteDeNoticias
 
 Essa é a versão do usuario em que qualquer um pode ler as noticias.
