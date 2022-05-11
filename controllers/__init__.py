@@ -1,4 +1,4 @@
-from flask import request,abort, jsonify,Blueprint,make_response
+from flask import request, jsonify,Blueprint,make_response
 
 from controllers.news_controller import getAllNews,getNews,createNews,editNews,deleteNews,getNewsFromASpecitifCategory
 from controllers.adm_controller import login
