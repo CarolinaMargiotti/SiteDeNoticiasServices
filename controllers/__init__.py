@@ -14,11 +14,11 @@ def getallnews():
     quantity = req.get("quantity",None)
 
     if startNumber is None:
-        res = make_response({"mensagem":'falta startNumber'},404)
+        res = make_response({"mensagem":'falta startNumber'},400)
         return res
 
     if quantity is None:
-        res = make_response({"mensagem":'falta quantity'},404)
+        res = make_response({"mensagem":'falta quantity'},400)
         return res
 
     allnews = getAllNews(startNumber,quantity)
@@ -34,15 +34,15 @@ def getallnewsbycategory():
     categoria = req.get("categoria",None)
 
     if startNumber is None:
-        res = make_response({"mensagem":'falta startNumber'},404)
+        res = make_response({"mensagem":'falta startNumber'},400)
         return res
 
     if quantity is None:
-        res = make_response({"mensagem":'falta quantity'},404)
+        res = make_response({"mensagem":'falta quantity'},400)
         return res
 
     if categoria is None:
-        res = make_response({"mensagem":'falta categoria'},404)
+        res = make_response({"mensagem":'falta categoria'},400)
         return res
 
     allnews = getNewsFromASpecitifCategory(categoria,startNumber,quantity)
@@ -56,7 +56,7 @@ def getnews():
     id = request.args.get("id",None)
 
     if id is None:
-        res = make_response({"mensagem":'falta id'},404)
+        res = make_response({"mensagem":'falta id'},400)
         return res
 
     news = getNews(id)
@@ -74,23 +74,23 @@ def createnews():
     conteudo = req.get('conteudo',None)
 
     if titulo is None:
-        res = make_response({"mensagem":'falta titulo'},404)
+        res = make_response({"mensagem":'falta titulo'},400)
         return res
 
     if categoria is None:
-        res = make_response({"mensagem":'falta categoria'},404)
+        res = make_response({"mensagem":'falta categoria'},400)
         return res
 
     if resumo is None:
-        res = make_response({"mensagem":'falta resumo'},404)
+        res = make_response({"mensagem":'falta resumo'},400)
         return res
 
     if conteudo is None:
-        res = make_response({"mensagem":'falta conteudo'},404)
+        res = make_response({"mensagem":'falta conteudo'},400)
         return res
 
     if assunto is None:
-        res = make_response({"mensagem":'falta assunto'},404)
+        res = make_response({"mensagem":'falta assunto'},400)
         return res
 
     newsCreated = createNews(titulo,categoria,resumo,assunto,conteudo)
@@ -109,27 +109,27 @@ def editnews():
     assunto = req.get("assunto",None)
 
     if id is None:
-        res = make_response({"mensagem":'falta id'},404)
+        res = make_response({"mensagem":'falta id'},400)
         return res
 
     if titulo is None:
-        res = make_response({"mensagem":'falta titulo'},404)
+        res = make_response({"mensagem":'falta titulo'},400)
         return res
 
     if categoria is None:
-        res = make_response({"mensagem":'falta categoria'},404)
+        res = make_response({"mensagem":'falta categoria'},400)
         return res
 
     if resumo is None:
-        res = make_response({"mensagem":'falta resumo'},404)
+        res = make_response({"mensagem":'falta resumo'},400)
         return res
 
     if conteudo is None:
-        res = make_response({"mensagem":'falta conteudo'},404)
+        res = make_response({"mensagem":'falta conteudo'},400)
         return res
 
     if assunto is None:
-        res = make_response({"mensagem":'falta assunto'},404)
+        res = make_response({"mensagem":'falta assunto'},400)
         return res
 
     newsEdited = editNews(id,titulo,categoria,resumo,assunto,conteudo)
@@ -142,29 +142,29 @@ def deletenews():
     id = request.args.get("id",None)
 
     if id is None:
-        res = make_response({"mensagem":'falta id'},404)
+        res = make_response({"mensagem":'falta id'},400)
         return res
 
     newsDeleted = deleteNews(id)
     res = make_response(jsonify(newsDeleted),200)
     return res
 
-@adm_bp.route('/login/', methods=["POST"])
+@adm_bp.route('/login', methods=["POST"])
 def loginADM():
     req = request.args
     user = req.get("user")
     password = req.get("password")
 
     if user is None:
-        res = make_response({"mensagem":'falta nome do usuario'},404)
+        res = make_response({"mensagem":'falta nome do usuario'},400)
 
     if password is None:
-        res = make_response({"mensagem":'falta senha'},404)
+        res = make_response({"mensagem":'falta senha'},400)
 
     loginUser = login(user,password)
     if loginUser == 'okay':
         res = make_response(jsonify(loginUser),200)
     else:
-        res = make_response({"mensagem":'não foi possivel logar'},404)
+        res = make_response({"mensagem":'não foi possivel logar'},400)
 
     return res

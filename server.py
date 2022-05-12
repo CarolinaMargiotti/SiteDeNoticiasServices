@@ -2,6 +2,7 @@ from flask import Flask,request
 from controllers import news_bp,adm_bp
 from db.session import session
 from flask_cors import CORS, cross_origin
+from models.adm import Adm;
 
 
 def createAdm():
@@ -24,7 +25,7 @@ app.register_blueprint(adm_bp)
 def after_request(response):
     white_origin= ['http://www.dom.com:8000','http://localhost']
     if request.headers['Origin'] in white_origin:
-        response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] 
+        response.headers['Access-Control-Allow-Origin'] = request.headers['Origin']
         response.headers['Access-Control-Allow-Methods'] = 'PUT,GET,POST,DELETE'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
     return response

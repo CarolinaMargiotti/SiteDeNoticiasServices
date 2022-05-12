@@ -4,8 +4,10 @@ from models.adm import Adm
 
 def login(user,password):
     try:
-        statement = select(Adm.username, Adm.password).where(Adm.username==user)
+        statement = select(Adm.username, Adm.password).where(Adm.username==f'{user}')
         foundUser = session.execute(statement).first()
+        if foundUser is None:
+            return 'erro'
         if foundUser.password == password:
             return 'okay'
         else:
