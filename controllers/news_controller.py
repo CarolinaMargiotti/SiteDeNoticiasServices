@@ -2,6 +2,8 @@ from db.session import session
 from sqlalchemy import select
 from flask import make_response,jsonify
 from models.news import News
+from models.subjects import Subjects
+from controllers.subjects_controller import createSubject
 
 def getAllNews(startNumber:int, quantity:int):
     allNews = session.query(News).all()
@@ -28,8 +30,10 @@ def getNewsFromASpecitifCategory(categoria,startNumber:int, quantity:int):
 
     return treatedNews
 
+
 def createNews(titulo,categoria,resumo,assunto,conteudo):
     try:
+        createSubject(assunto)
         newNews = News(titulo=titulo,categoria=categoria,resumo=resumo,assunto=assunto,conteudo=conteudo)
         session.add(newNews)
         session.commit()

@@ -2,9 +2,11 @@ from flask import request, jsonify,Blueprint,make_response
 
 from controllers.news_controller import getAllNews,getNews,createNews,editNews,deleteNews,getNewsFromASpecitifCategory
 from controllers.adm_controller import login
+from controllers.subjects_controller import getSubjects,createSubject
 
 news_bp = Blueprint("news",__name__)
 adm_bp = Blueprint("adm",__name__)
+subjects_bp = Blueprint("subjects",__name__)
 
 @news_bp.route("/getallnews", methods=["GET"])
 def getallnews():
@@ -155,9 +157,32 @@ def loginADM():
 
     if user is None:
         res = make_response({"mensagem":'falta nome do usuario'},400)
+        return res
+
 
     if password is None:
         res = make_response({"mensagem":'falta senha'},400)
+        return res
 
     res = login(user,password)
+    return res
+
+
+@subjects_bp.route("/getallsubjects",methods=['GET'])
+def getAllSubjects():
+    res = getSubjects()
+    return res
+
+@subjects_bp.route("/createsubject",methods=['POST'])
+def createNewSubject():
+    req = request.args
+    name = req.get("subjectName",None)
+
+    if name is None:
+        res = make_response({"mensagem":'falta nome do assunto'},400)
+        return res
+
+
+
+    res = createSubject(name)
     return res

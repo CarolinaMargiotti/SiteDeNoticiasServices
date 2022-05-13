@@ -1,5 +1,5 @@
 from flask import Flask,request
-from controllers import news_bp,adm_bp
+from controllers import news_bp,adm_bp,subjects_bp
 from db.session import session
 from flask_cors import CORS, cross_origin
 from models.adm import Adm;
@@ -20,6 +20,7 @@ app = Flask(__name__)
 CORS(app)
 app.register_blueprint(news_bp)
 app.register_blueprint(adm_bp)
+app.register_blueprint(subjects_bp)
 
 
 @app.after_request
