@@ -1,6 +1,6 @@
 from db.session import session
 from sqlalchemy import select
-from flask import jsonify
+from flask import make_response,jsonify
 from models.news import News
 
 def getAllNews(startNumber:int, quantity:int):
@@ -29,10 +29,15 @@ def getNewsFromASpecitifCategory(categoria,startNumber:int, quantity:int):
     return treatedNews
 
 def createNews(titulo,categoria,resumo,assunto,conteudo):
-    newNews = News(titulo=titulo,categoria=categoria,resumo=resumo,assunto=assunto,conteudo=conteudo)
-    session.add(newNews)
-    session.commit()
-    return {"id":1,"titulo":titulo,"assunto":assunto,"categoria":categoria,"resumo":resumo,"conteudo":conteudo}
+    try:
+        newNews = News(titulo=titulo,categoria=categoria,resumo=resumo,assunto=assunto,conteudo=conteudo)
+        session.add(newNews)
+        session.commit()
+        createdNews={"id":1,"titulo":titulo,"assunto":assunto,"categoria":categoria,"resumo":resumo,"conteudo":conteudo}
+        return make_response(createdNews,200)
+    except:
+        session.rollback();
+        return make_response({"mensagem":"ocorreu um erro"},400)
 
 def editNews(id,titulo,categoria,resumo,assunto,conteudo):
     news = session.query(News).get(id)

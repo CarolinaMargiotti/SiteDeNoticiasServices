@@ -93,9 +93,7 @@ def createnews():
         res = make_response({"mensagem":'falta assunto'},400)
         return res
 
-    newsCreated = createNews(titulo,categoria,resumo,assunto,conteudo)
-    res = make_response(jsonify(newsCreated),200)
-
+    res = createNews(titulo,categoria,resumo,assunto,conteudo)
     return res
 
 @news_bp.route('/editnews/', methods=["PUT"])
@@ -161,10 +159,5 @@ def loginADM():
     if password is None:
         res = make_response({"mensagem":'falta senha'},400)
 
-    loginUser = login(user,password)
-    if loginUser == 'okay':
-        res = make_response(jsonify(loginUser),200)
-    else:
-        res = make_response({"mensagem":'não foi possivel logar'},400)
-
+    res = login(user,password)
     return res

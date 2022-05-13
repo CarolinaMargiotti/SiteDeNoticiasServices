@@ -11,7 +11,8 @@ def createAdm():
         session.add(userAdm)
         session.commit()
     except:
-        print("adm ja existe")
+        session.rollback()
+
 
 createAdm()
 
