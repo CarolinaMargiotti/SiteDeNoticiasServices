@@ -9,20 +9,18 @@ class News(Base):
     __tablename__='news'
     id = Column(Integer, primary_key=True)
     titulo= Column(String(255),nullable=False)
-    categoria= Column(String(255),nullable=False)
     resumo=Column(String(255),nullable=False)
     conteudo=Column(String(255),nullable=False)
-    assunto=Column(String(255),nullable=False)
+    assunto=Column(Integer,nullable=False)
 
-    def __init__(self, titulo=None,categoria=None,resumo=None,assunto=None,conteudo=None):
+    def __init__(self, titulo=None,resumo=None,assunto=None,conteudo=None):
         self.titulo = titulo
         self.resumo = resumo
-        self.categoria=categoria
         self.conteudo = conteudo
         self.assunto = assunto
 
     def __repr__(self):
-        return (f'News({self.id},{self.titulo},{self.resumo},{self.categoria},{self.assunto})')
+        return (f'News({self.id},{self.titulo},{self.resumo},{self.assunto})')
 
 
 

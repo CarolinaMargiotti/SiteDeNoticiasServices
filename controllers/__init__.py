@@ -1,6 +1,6 @@
 from flask import request, jsonify,Blueprint,make_response
 
-from controllers.news_controller import getAllNews,getNews,createNews,editNews,deleteNews,getNewsFromASpecitifCategory
+from controllers.news_controller import getAllNews,getNews,createNews,editNews,deleteNews,getNewsFromASpecificSubject
 from controllers.adm_controller import login
 from controllers.subjects_controller import getSubjects,createSubject
 
@@ -23,17 +23,16 @@ def getallnews():
         res = make_response({"mensagem":'falta quantity'},400)
         return res
 
-    allnews = getAllNews(startNumber,quantity)
-    res = make_response(jsonify(allnews),200)
+    res = getAllNews(startNumber,quantity)
     return res
 
-@news_bp.route("/getallnewsbycategory", methods=["GET"])
-def getallnewsbycategory():
+@news_bp.route("/getallnewsbysubject", methods=["GET"])
+def getallnewsbysubject():
     req = request.args
 
     startNumber = req.get("startNumber",None)
     quantity = req.get("quantity",None)
-    categoria = req.get("categoria",None)
+    assunto = req.get("assunto",None)
 
     if startNumber is None:
         res = make_response({"mensagem":'falta startNumber'},400)
@@ -43,18 +42,17 @@ def getallnewsbycategory():
         res = make_response({"mensagem":'falta quantity'},400)
         return res
 
-    if categoria is None:
-        res = make_response({"mensagem":'falta categoria'},400)
+    if assunto is None:
+        res = make_response({"mensagem":'falta assunto'},400)
         return res
 
-    allnews = getNewsFromASpecitifCategory(categoria,startNumber,quantity)
+    allnews = getNewsFromASpecificSubject(assunto,startNumber,quantity)
     res = make_response(jsonify(allnews),200)
     return res
 
 
 @news_bp.route("/getnews", methods=["GET"])
 def getnews():
-    print(request.args)
     id = request.args.get("id",None)
 
     if id is None:
@@ -71,16 +69,11 @@ def createnews():
     req = request.args
     titulo = req.get("titulo",None)
     assunto = req.get("assunto",None)
-    categoria = req.get('categoria',None)
     resumo = req.get("resumo",None)
     conteudo = req.get('conteudo',None)
 
     if titulo is None:
         res = make_response({"mensagem":'falta titulo'},400)
-        return res
-
-    if categoria is None:
-        res = make_response({"mensagem":'falta categoria'},400)
         return res
 
     if resumo is None:
@@ -95,7 +88,7 @@ def createnews():
         res = make_response({"mensagem":'falta assunto'},400)
         return res
 
-    res = createNews(titulo,categoria,resumo,assunto,conteudo)
+    res = createNews(titulo,resumo,assunto,conteudo)
     return res
 
 @news_bp.route('/editnews/', methods=["PUT"])
@@ -103,7 +96,6 @@ def editnews():
     req = request.args
     id = req.get("id",None)
     titulo = req.get("titulo",None)
-    categoria = req.get('categoria',None)
     resumo = req.get("resumo",None)
     conteudo = req.get('conteudo',None)
     assunto = req.get("assunto",None)
@@ -116,10 +108,6 @@ def editnews():
         res = make_response({"mensagem":'falta titulo'},400)
         return res
 
-    if categoria is None:
-        res = make_response({"mensagem":'falta categoria'},400)
-        return res
-
     if resumo is None:
         res = make_response({"mensagem":'falta resumo'},400)
         return res
@@ -132,7 +120,7 @@ def editnews():
         res = make_response({"mensagem":'falta assunto'},400)
         return res
 
-    newsEdited = editNews(id,titulo,categoria,resumo,assunto,conteudo)
+    newsEdited = editNews(id,titulo,resumo,assunto,conteudo)
     res = make_response(jsonify(newsEdited),200)
 
     return res
@@ -181,8 +169,6 @@ def createNewSubject():
     if name is None:
         res = make_response({"mensagem":'falta nome do assunto'},400)
         return res
-
-
 
     res = createSubject(name)
     return res

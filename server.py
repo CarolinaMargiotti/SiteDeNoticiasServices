@@ -10,6 +10,7 @@ def createAdm():
         userAdm = Adm(username="usuario",password="senha")
         session.add(userAdm)
         session.commit()
+        session.rollback()
     except:
         session.rollback()
 
@@ -25,12 +26,15 @@ app.register_blueprint(subjects_bp)
 
 @app.after_request
 def after_request(response):
-    white_origin= ['http://www.dom.com:8000','http://localhost']
-    if request.headers['Origin'] in white_origin:
-        response.headers['Access-Control-Allow-Origin'] = request.headers['Origin']
-        response.headers['Access-Control-Allow-Methods'] = 'PUT,GET,POST,DELETE'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
-    return response
+    try:
+        white_origin= ['http://www.dom.com:8000','http://localhost']
+        if request.headers['Origin'] in white_origin:
+            response.headers['Access-Control-Allow-Origin'] = request.headers['Origin']
+            response.headers['Access-Control-Allow-Methods'] = 'PUT,GET,POST,DELETE'
+            response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+        return response
+    except:
+        return response
 
 if __name__ == '__main__':
     app.run(port=8080)

@@ -8,7 +8,8 @@ def createSubject(subject):
         subject = Subjects(subjectName=subject)
         session.add(subject)
         session.commit()
-        return make_response({"subjectName":subject},200)
+        session.rollback()
+        return make_response({"subjectName":subject.subjectName},200)
 
     except:
         session.rollback();
@@ -18,6 +19,7 @@ def createSubject(subject):
 def getSubjects():
     try:
         allSubjects = session.query(Subjects).all()
+        session.rollback()
         treatedSubjects =[]
         for subject in allSubjects:
             treatedSubjects.append({"id":subject.id,"name":subject.subjectName})

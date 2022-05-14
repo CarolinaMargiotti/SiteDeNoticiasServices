@@ -51,7 +51,7 @@ Essa é a versão do usuario em que qualquer um pode ler as noticias.
 
 # Requisitos Funcionais
 
-1. Qualquer usuário pode visualizar as notícias associadas a uma categoria ao acessar a interface correspondente (ex. um menu de navegação).
+1. Qualquer usuário pode visualizar as notícias associadas a um assunto ao acessar a interface correspondente (ex. um menu de navegação).
 2. Somente um usuário administrador (único) deve ser capaz de cadastrar, excluir ou alterar as notícias.
 3. O usuário administrador (único) deve acessar a interface administrativa somente após ter sido autenticado, não havendo uma rota diretamente acessível sem o procedimento de autenticação.
 4. Cada notícia deve possuir (no mínimo):

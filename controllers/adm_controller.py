@@ -7,6 +7,7 @@ def login(user,password):
     try:
         statement = select(Adm.id,Adm.username,Adm.password).where(Adm.username==f'{user}')
         foundUser = session.execute(statement).first()
+        session.rollback()
         if foundUser is None:
             return make_response({"mensagem":"Usuario não existe"},400)
         if foundUser.password == password:
