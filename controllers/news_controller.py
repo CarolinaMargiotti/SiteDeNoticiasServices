@@ -61,12 +61,15 @@ def editNews(id,titulo,resumo,assunto,conteudo):
         news.resumo = resumo
         news.assunto = assunto
         news.conteudo=conteudo
+
         session.commit()
         session.rollback()
-        return {"id":1,"titulo":titulo,"assunto":assunto,"resumo":resumo,"conteudo":conteudo}
+        editedNews={"id":1,"titulo":titulo,"assunto":assunto,"resumo":resumo,"conteudo":conteudo}
+
+        return make_response(editedNews,200)
     except:
         session.rollback();
-        return {}
+        return make_response({"mensagem":"Ocorreu um erro"},400)
 
 def deleteNews(id):
     try:

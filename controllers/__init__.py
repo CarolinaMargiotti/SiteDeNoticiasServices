@@ -91,7 +91,7 @@ def createnews():
     res = createNews(titulo,resumo,assunto,conteudo)
     return res
 
-@news_bp.route('/editnews/', methods=["PUT"])
+@news_bp.route('/editnews/', methods=["POST"])
 def editnews():
     req = request.args
     id = req.get("id",None)
@@ -120,9 +120,7 @@ def editnews():
         res = make_response({"mensagem":'falta assunto'},400)
         return res
 
-    newsEdited = editNews(id,titulo,resumo,assunto,conteudo)
-    res = make_response(jsonify(newsEdited),200)
-
+    res = editNews(id,titulo,resumo,assunto,conteudo)
     return res
 
 @news_bp.route('/deletenews/', methods=["DELETE"])

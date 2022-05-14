@@ -20,9 +20,9 @@ def getSubjects():
     try:
         allSubjects = session.query(Subjects).all()
         session.rollback()
-        treatedSubjects =[]
+        treatedSubjects ={}
         for subject in allSubjects:
-            treatedSubjects.append({"id":subject.id,"name":subject.subjectName})
+            treatedSubjects[subject.id]=subject.subjectName
         return make_response(jsonify(treatedSubjects),200)
 
     except:
