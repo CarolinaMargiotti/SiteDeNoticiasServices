@@ -123,7 +123,7 @@ def editnews():
     res = editNews(id,titulo,resumo,assunto,conteudo)
     return res
 
-@news_bp.route('/deletenews/', methods=["DELETE"])
+@news_bp.route('/deletenews/', methods=["post"])
 def deletenews():
     id = request.args.get("id",None)
 
