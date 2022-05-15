@@ -1,5 +1,4 @@
 from db.session import session
-from sqlalchemy import select
 from flask import make_response,jsonify
 from models.subjects import Subjects
 
@@ -35,6 +34,29 @@ def deleteSubject(subjectId):
         session.commit()
         session.rollback()
         return make_response({"id":subjectId},200)
+    except:
+        session.rollback();
+        return make_response({"mensagem":"Ocorreu um erro"},400)
+
+def getSpecificId(id):
+    try:
+        subject = session.query(Subjects).get(id)
+        session.rollback();
+        chosenSubject = {"id":subject.id,"subjectName":subject.subjectName}
+        return make_response(jsonify(chosenSubject),200)
+
+    except:
+        session.rollback();
+        return make_response({"mensagem":"Ocorreu um erro"},400)
+
+def editSubject(id,newname):
+    try:
+        subject = session.query(Subjects).get(id)
+        subject.subjectName = newname
+        session.commit()
+        session.rollback()
+        newSubject ={"id":id,"subjectName":newname};
+        return make_response(jsonify(newSubject),200)
     except:
         session.rollback();
         return make_response({"mensagem":"Ocorreu um erro"},400)

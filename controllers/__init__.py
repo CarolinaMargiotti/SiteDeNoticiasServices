@@ -2,7 +2,7 @@ from flask import request, jsonify,Blueprint,make_response
 
 from controllers.news_controller import getAllNews,getNews,createNews,editNews,deleteNews,getNewsFromASpecificSubject
 from controllers.adm_controller import login
-from controllers.subjects_controller import getSubjects,createSubject,deleteSubject
+from controllers.subjects_controller import getSubjects,createSubject,deleteSubject,getSpecificId,editSubject
 
 news_bp = Blueprint("news",__name__)
 adm_bp = Blueprint("adm",__name__)
@@ -171,7 +171,7 @@ def createNewSubject():
     res = createSubject(name)
     return res
 
-@news_bp.route('/deletesubject', methods=["post"])
+@subjects_bp.route('/deletesubject', methods=["post"])
 def deleteSpecificSubject():
     id = request.args.get("id",None)
 
@@ -181,3 +181,32 @@ def deleteSpecificSubject():
 
     res = deleteSubject(id)
     return res
+
+@subjects_bp.route('/getnewsbyid',methods=['get'])
+def getSubjectById():
+    id = request.args.get("id",None)
+
+    if id is None:
+        res = make_response({"mensagem":'falta id'},400)
+        return res
+
+    res = getSpecificId(id)
+    return res
+
+@subjects_bp.route("/editsubject",methods=['post'])
+def editSpecificSubject():
+    req = request.args
+    id = req.get("id",None)
+    nome = req.get("subjectName",None)
+
+    if id is None:
+        res = make_response({"mensagem":'falta id'},400)
+        return res
+
+    if nome is None:
+        res = make_response({"mensagem":"falta nome do assunto"},400)
+        return res
+
+    res = editSubject(id,nome)
+    return res
+

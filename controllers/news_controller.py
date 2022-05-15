@@ -2,7 +2,6 @@ from db.session import session
 from sqlalchemy import select
 from flask import make_response,jsonify
 from models.news import News
-from models.subjects import Subjects
 from controllers.subjects_controller import createSubject
 
 def getAllNews(startNumber:int, quantity:int):
