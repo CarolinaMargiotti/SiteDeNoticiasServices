@@ -28,3 +28,13 @@ def getSubjects():
     except:
         session.rollback();
         return make_response({"mensagem":"Ocorreu um erro"},400)
+
+def deleteSubject(subjectId):
+    try:
+        session.query(Subjects).filter(Subjects.id == subjectId).delete()
+        session.commit()
+        session.rollback()
+        return make_response({"id":subjectId},200)
+    except:
+        session.rollback();
+        return make_response({"mensagem":"Ocorreu um erro"},400)
