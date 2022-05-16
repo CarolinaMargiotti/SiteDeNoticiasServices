@@ -32,7 +32,7 @@ def getSubjects(startNumber:int, quantity:int):
     try:
         allSubjects = session.query(Subjects).all()
         session.rollback()
-        endNumber = int(startNumber)+int(quantity)
+        endNumber = (int(startNumber)+int(quantity))-1
         slicedSubjects = allSubjects[int(startNumber)-1:endNumber]
 
         treatedSubjects ={}

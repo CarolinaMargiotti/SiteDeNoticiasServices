@@ -8,7 +8,7 @@ def getAllNews(startNumber:int, quantity:int):
     try:
         allNews = session.query(News).all()
         session.rollback()
-        endNumber = int(startNumber)+int(quantity)
+        endNumber = (int(startNumber)+int(quantity))-1
         slicedNews = allNews[int(startNumber)-1:endNumber]
 
         treatedNews=[]
