@@ -14,13 +14,29 @@ def createSubject(subject):
         session.rollback();
         return make_response({"mensagem":"Assunto ja existe"},400)
 
-
-def getSubjects():
+def getAllSubjects():
     try:
         allSubjects = session.query(Subjects).all()
         session.rollback()
+
         treatedSubjects ={}
         for subject in allSubjects:
+            treatedSubjects[subject.id]=subject.subjectName
+        return make_response(jsonify(treatedSubjects),200)
+
+    except:
+        session.rollback();
+        return make_response({"mensagem":"Ocorreu um erro"},400)
+
+def getSubjects(startNumber:int, quantity:int):
+    try:
+        allSubjects = session.query(Subjects).all()
+        session.rollback()
+        endNumber = int(startNumber)+int(quantity)
+        slicedSubjects = allSubjects[int(startNumber)-1:endNumber]
+
+        treatedSubjects ={}
+        for subject in slicedSubjects:
             treatedSubjects[subject.id]=subject.subjectName
         return make_response(jsonify(treatedSubjects),200)
 

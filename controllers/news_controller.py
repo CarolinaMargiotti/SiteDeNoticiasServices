@@ -8,7 +8,8 @@ def getAllNews(startNumber:int, quantity:int):
     try:
         allNews = session.query(News).all()
         session.rollback()
-        slicedNews = allNews[int(startNumber)-1:int(quantity)]
+        endNumber = int(startNumber)+int(quantity)
+        slicedNews = allNews[int(startNumber)-1:endNumber]
 
         treatedNews=[]
         for news in slicedNews:
@@ -42,7 +43,6 @@ def getNewsFromASpecificSubject(assunto,startNumber:int, quantity:int):
 
 def createNews(titulo,resumo,assunto,conteudo):
     try:
-        createSubject(assunto)
         newNews = News(titulo=titulo,resumo=resumo,assunto=assunto,conteudo=conteudo)
         session.add(newNews)
         session.commit()

@@ -2,7 +2,7 @@ from flask import request, jsonify,Blueprint,make_response
 
 from controllers.news_controller import getAllNews,getNews,createNews,editNews,deleteNews,getNewsFromASpecificSubject
 from controllers.adm_controller import login
-from controllers.subjects_controller import getSubjects,createSubject,deleteSubject,getSpecificId,editSubject
+from controllers.subjects_controller import getSubjects,createSubject,deleteSubject,getSpecificId,editSubject,getAllSubjects
 
 news_bp = Blueprint("news",__name__)
 adm_bp = Blueprint("adm",__name__)
@@ -155,8 +155,26 @@ def loginADM():
 
 
 @subjects_bp.route("/getallsubjects",methods=['GET'])
-def getAllSubjects():
-    res = getSubjects()
+def getAllOfTheSubjects():
+    res = getAllSubjects()
+    return res
+
+@subjects_bp.route("/getsubjects",methods=['GET'])
+def getSubjectsPaginated():
+    req = request.args
+
+    startNumber = req.get("startNumber",None)
+    quantity = req.get("quantity",None)
+
+    if startNumber is None:
+        res = make_response({"mensagem":'falta startNumber'},400)
+        return res
+
+    if quantity is None:
+        res = make_response({"mensagem":'falta quantity'},400)
+        return res
+
+    res = getSubjects(startNumber,quantity)
     return res
 
 @subjects_bp.route("/createsubject",methods=['POST'])
