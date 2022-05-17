@@ -3,7 +3,7 @@ from controllers import news_bp,adm_bp,subjects_bp
 from db.session import session
 from flask_cors import CORS, cross_origin
 from models.adm import Adm;
-
+from waitress import serve
 
 def createAdm():
     try:
@@ -37,4 +37,5 @@ def after_request(response):
         return response
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    # app.run(port=8080)
+    serve(app, host='0.0.0.0', port=8080)
