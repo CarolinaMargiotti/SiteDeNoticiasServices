@@ -1,3 +1,6 @@
 import sqlalchemy
+from models.envVariables import databaseDBName,databasePassword,databaseUser,databaseHost
 
-engine = sqlalchemy.create_engine("mysql+pymysql://root:123456@localhost/db1?charset=utf8mb4")
+engineURL=f'mysql+pymysql://{databaseUser}:{databasePassword}@{databaseHost}/{databaseDBName}?charset=utf8mb4'
+
+engine = sqlalchemy.create_engine(engineURL)
