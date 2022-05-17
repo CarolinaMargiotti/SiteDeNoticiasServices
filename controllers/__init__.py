@@ -66,11 +66,13 @@ def getnews():
 
 @news_bp.route('/createnews/', methods=["POST"])
 def createnews():
-    req = request.args
+    req = request.form
     titulo = req.get("titulo",None)
     assunto = req.get("assunto",None)
     resumo = req.get("resumo",None)
     conteudo = req.get('conteudo',None)
+
+    # print(request.json)
 
     if titulo is None:
         res = make_response({"mensagem":'falta titulo'},400)
@@ -93,7 +95,7 @@ def createnews():
 
 @news_bp.route('/editnews/', methods=["POST"])
 def editnews():
-    req = request.args
+    req = request.form
     id = req.get("id",None)
     titulo = req.get("titulo",None)
     resumo = req.get("resumo",None)
@@ -179,7 +181,7 @@ def getSubjectsPaginated():
 
 @subjects_bp.route("/createsubject",methods=['POST'])
 def createNewSubject():
-    req = request.args
+    req = request.form
     name = req.get("subjectName",None)
 
     if name is None:
@@ -213,7 +215,7 @@ def getSubjectById():
 
 @subjects_bp.route("/editsubject",methods=['post'])
 def editSpecificSubject():
-    req = request.args
+    req = request.form
     id = req.get("id",None)
     nome = req.get("subjectName",None)
 
