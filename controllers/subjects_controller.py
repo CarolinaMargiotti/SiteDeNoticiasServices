@@ -1,6 +1,7 @@
 from db.session import session
 from flask import make_response,jsonify
 from models.subjects import Subjects
+import controllers.news_controller as news_controller
 
 def createSubject(subject):
     try:
@@ -46,6 +47,10 @@ def getSubjects(startNumber:int, quantity:int):
 
 def deleteSubject(subjectId):
     try:
+        resNews = news_controller.getNewsFromASpecificSubject(subjectId,1,4)
+        if len(resNews)>0:
+            return make_response({"mensagem":"Existe noticias com esse assunto, as delete primeiro"},400)
+
         session.query(Subjects).filter(Subjects.id == subjectId).delete()
         session.commit()
         session.rollback()

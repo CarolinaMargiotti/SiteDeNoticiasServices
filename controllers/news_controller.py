@@ -13,7 +13,7 @@ def getAllNews(startNumber:int, quantity:int):
 
         treatedNews=[]
         for news in slicedNews:
-            treatedNews.append({"id":news.id,"titulo":news.titulo,"assunto":news.assunto,"resumo":news.resumo,"conteudo":news.conteudo})
+            treatedNews.append({"id":news.id,"titulo":news.titulo,"assunto":str(news.assunto),"resumo":news.resumo,"conteudo":news.conteudo})
         return make_response(jsonify(treatedNews),200)
     except:
         session.rollback();
@@ -23,7 +23,7 @@ def getAllNews(startNumber:int, quantity:int):
 
 def getNews(id:int):
     news = session.query(News).get(id)
-    return {"id":id,"titulo":news.titulo,"assunto":news.assunto,"resumo":news.resumo,"conteudo":news.conteudo}
+    return {"id":id,"titulo":news.titulo,"assunto":str(news.assunto),"resumo":news.resumo,"conteudo":news.conteudo}
 
 def getNewsFromASpecificSubject(assunto,startNumber:int, quantity:int):
     try:
@@ -33,7 +33,7 @@ def getNewsFromASpecificSubject(assunto,startNumber:int, quantity:int):
 
         treatedNews=[]
         for news in slicedNews:
-            treatedNews.append({"id":news.id,"titulo":news.titulo,"assunto":news.assunto,"resumo":news.resumo,"conteudo":news.conteudo})
+            treatedNews.append({"id":news.id,"titulo":news.titulo,"assunto":str(news.assunto),"resumo":news.resumo,"conteudo":news.conteudo})
 
         return treatedNews
     except:
