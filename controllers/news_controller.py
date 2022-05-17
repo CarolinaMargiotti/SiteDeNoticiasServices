@@ -2,7 +2,7 @@ from db.session import session
 from sqlalchemy import select
 from flask import make_response,jsonify
 from models.news import News
-from controllers.subjects_controller import createSubject
+from controllers.subjects_controller import getSpecificId
 
 def getAllNews(startNumber:int, quantity:int):
     try:
@@ -43,6 +43,10 @@ def getNewsFromASpecificSubject(assunto,startNumber:int, quantity:int):
 
 def createNews(titulo,resumo,assunto,conteudo):
     try:
+        resSubject = getSpecificId(assunto)
+        if(resSubject.status_code!=200):
+            return make_response({"mensagem":"assunto não existe"},400)
+
         newNews = News(titulo=titulo,resumo=resumo,assunto=assunto,conteudo=conteudo)
         session.add(newNews)
         session.commit()
