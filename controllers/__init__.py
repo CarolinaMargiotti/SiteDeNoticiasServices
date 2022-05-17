@@ -93,7 +93,7 @@ def createnews():
     res = createNews(titulo,resumo,assunto,conteudo)
     return res
 
-@news_bp.route('/editnews/', methods=["POST"])
+@news_bp.route('/editnews', methods=["put"])
 def editnews():
     req = request.form
     id = req.get("id",None)
@@ -125,7 +125,7 @@ def editnews():
     res = editNews(id,titulo,resumo,assunto,conteudo)
     return res
 
-@news_bp.route('/deletenews/', methods=["post"])
+@news_bp.route('/deletenews', methods=["delete"])
 def deletenews():
     id = request.args.get("id",None)
 
@@ -191,7 +191,7 @@ def createNewSubject():
     res = createSubject(name)
     return res
 
-@subjects_bp.route('/deletesubject', methods=["post"])
+@subjects_bp.route('/deletesubject', methods=["delete"])
 def deleteSpecificSubject():
     id = request.args.get("id",None)
 
@@ -213,7 +213,7 @@ def getSubjectById():
     res = getSpecificId(id)
     return res
 
-@subjects_bp.route("/editsubject",methods=['post'])
+@subjects_bp.route("/editsubject",methods=['put'])
 def editSpecificSubject():
     req = request.form
     id = req.get("id",None)
