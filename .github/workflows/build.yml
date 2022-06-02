@@ -16,7 +16,6 @@ jobs:
             - name: Setup MariaDb
               uses: getong/mariadb-action@master
               with:
-                  mysql version: 10.4.10
                   mysql database: db1
                   mysql root password: 123456
 
