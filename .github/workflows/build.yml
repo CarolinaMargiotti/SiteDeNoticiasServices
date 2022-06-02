@@ -9,8 +9,29 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+
+        services:
+            mariadn:
+                image: mariadb:latest
+                ports:
+                    - 3306
+                env:
+                    MYSQL_USER: root
+                    MYSQL_PASSWORD: 123456
+                    MYSQL_DATABASE: db1
+                    MYSQL_ROOT_PASSWORD: 123456
+
         steps:
             - uses: actions/checkout@v2
+
+             - name: Verify MariaDB connection
+                env:
+                    PORT: ${{ job.services.mariadb.ports[3306] }}
+                run: |
+                while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
+                    sleep 1
+                done
+
             - name: Set up Python 3.8
               uses: actions/setup-python@v2
               with:
