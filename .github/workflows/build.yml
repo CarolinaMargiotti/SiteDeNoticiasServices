@@ -14,7 +14,7 @@ jobs:
             mariadb:
                 image: mariadb:latest
                 ports:
-                    - 3306
+                    - 3306:3306
                 env:
                     MYSQL_USER: root
                     MYSQL_DATABASE: db1
@@ -26,7 +26,7 @@ jobs:
             databasePassword: 123456
             databaseDBName: db1
             databaseHost: localhost
-            port: 8080
+            port: 8080:8080
             host: 0.0.0.0
 
         steps:
