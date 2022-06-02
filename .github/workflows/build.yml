@@ -14,11 +14,11 @@ jobs:
             - uses: actions/checkout@v3
 
             - name: Setup MariaDb
-            uses: getong/mariadb-action@master
-            with:
-                mysql version: 10.4.10
-                mysql database: db1
-                mysql root password: 123456
+              uses: getong/mariadb-action@master
+              with:
+                  mysql version: 10.4.10
+                  mysql database: db1
+                  mysql root password: 123456
 
             - name: Set up Python 3.8
               uses: actions/setup-python@v2
