@@ -10,35 +10,26 @@ jobs:
     build:
         runs-on: ubuntu-latest
 
-        services:
-            mariadb:
-                image: mariadb:latest
-                ports:
-                    - 3306:3306
-                env:
-                    MYSQL_USER: root
-                    MYSQL_DATABASE: db1
-                    MYSQL_ROOT_PASSWORD: 123456
-                options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
-
-        env:
-            databaseUser: root
-            databasePassword: 123456
-            databaseDBName: db1
-            databaseHost: localhost
-            port: 8080:8080
-            host: 0.0.0.0
-
         steps:
             - uses: actions/checkout@v3
+
+            - name: Setup MariaDb
+                uses: getong/mariadb-action@master
+                with:
+                    mysql version: 10.4.10
+                    mysql database: db1
+                    mysql root password: 123456
+
             - name: Set up Python 3.8
               uses: actions/setup-python@v2
               with:
                   python-version: 3.8
+
             - name: Instalação de Dependencias
               run: |
                   python -m pip install --upgrade pip
                   pip install -r requirements.txt;
+
             - name: Execução de Teste de unidades
               run: |
                   python -m unittest discover ./tests
