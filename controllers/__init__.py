@@ -1,7 +1,7 @@
 from flask import request, jsonify,Blueprint,make_response
 
 from controllers.news_controller import getAllNews,getNews,createNews,editNews,deleteNews,getNewsFromASpecificSubject
-from controllers.adm_controller import login
+from controllers.adm_controller import login,checkUserDataIsValid
 from controllers.subjects_controller import getSubjects,createSubject,deleteSubject,getSpecificId,editSubject,getAllSubjects
 
 news_bp = Blueprint("news",__name__)
@@ -143,14 +143,9 @@ def loginADM():
     user = req.get("user")
     password = req.get("password")
 
-    if user is None:
-        res = make_response({"mensagem":'falta nome do usuario'},400)
-        return res
-
-
-    if password is None:
-        res = make_response({"mensagem":'falta senha'},400)
-        return res
+    respostaValidacao = checkUserDataIsValid(user,password)
+    if(respostaValidacao.status_code==400):
+        return respostaValidacao
 
     res = login(user,password)
     return res

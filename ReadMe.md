@@ -36,6 +36,14 @@ Essa é a versão do usuario em que qualquer um pode ler as noticias.
 
 `python server.py`
 
+## Rodar testes
+
+-   Documento de teste único
+    `python -m unittest ./tests/CheckUserDataTest.py`
+
+-   Pasta toda de test
+    `python -m unittest discover ./tests`
+
 # Requisitos Técnicos
 
 1. Utilizar linguagem de programação Python (versão 3.6 ou superior) no back end;
