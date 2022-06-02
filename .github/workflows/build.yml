@@ -20,6 +20,7 @@ jobs:
                     MYSQL_PASSWORD: 123456
                     MYSQL_DATABASE: db1
                     MYSQL_ROOT_PASSWORD: 123456
+                options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
 
         steps:
             - uses: actions/checkout@v2
