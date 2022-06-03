@@ -72,8 +72,6 @@ def createnews():
     resumo = req.get("resumo",None)
     conteudo = req.get('conteudo',None)
 
-    # print(request.json)
-
     if titulo is None:
         res = make_response({"mensagem":'falta titulo'},400)
         return res
@@ -144,8 +142,8 @@ def loginADM():
     password = req.get("password")
 
     respostaValidacao = checkUserDataIsValid(user,password)
-    if(respostaValidacao.status_code==400):
-        return respostaValidacao
+    if(respostaValidacao['status_code']==400):
+        return make_response(respostaValidacao['mensagem'],respostaValidacao['status_code'])
 
     res = login(user,password)
     return res

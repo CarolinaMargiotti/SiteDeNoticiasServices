@@ -5,15 +5,15 @@ from flask import make_response,jsonify
 
 def checkUserDataIsValid(user, password):
     if user is None or user=="":
-        res = make_response({"mensagem":'falta nome do usuario'},400)
+        res = {"mensagem":'falta nome do usuario',"status_code":400}
         return res
 
 
     if password is None or password=="":
-        res = make_response({"mensagem":'falta senha'},400)
+        res = {"mensagem":'falta senha do usuario',"status_code":400}
         return res
 
-    return make_response({},200)
+    return {"mensagem":'',"status_code":200}
 
 def login(user,password):
     try:
