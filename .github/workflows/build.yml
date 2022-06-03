@@ -13,12 +13,6 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            - name: Setup MariaDb
-              uses: getong/mariadb-action@master
-              with:
-                  mysql database: db1
-                  mysql root password: 123456
-
             - name: Set up Python 3.8
               uses: actions/setup-python@v2
               with:
