@@ -31,4 +31,4 @@ jobs:
 
             - name: Execução de Teste de unidades
               run: |
-                  python -m unittest ./tests/CheckUserDataTest.py
+                  python -m unittest test_CheckUserDataTest.py
