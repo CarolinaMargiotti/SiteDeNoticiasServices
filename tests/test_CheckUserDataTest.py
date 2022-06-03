@@ -16,7 +16,7 @@ class CheckUserDataTest(TestCase):
     def test_shouldReturnErrorCodeAndMessageIfPasswordEmpty(self):
         res = checkUserDataIsValid("user","")
         res2 = checkUserDataIsValid("user",None)
-        self.assertEqual(res, {"mensagem":'falta senha do usuario',"status_code":200})
+        self.assertEqual(res, {"mensagem":'falta senha do usuario',"status_code":400})
         self.assertEqual(res2, {"mensagem":'falta senha do usuario',"status_code":400})
 
 
