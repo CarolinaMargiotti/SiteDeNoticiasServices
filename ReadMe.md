@@ -43,10 +43,10 @@ Essa é a versão do usuario em que qualquer um pode ler as noticias.
 ## Rodar testes
 
 -   Documento de teste único
-    `python -m unittest ./tests/CheckUserDataTest.py`
+    `python -m unittest tests.CheckUserDataTest`
 
 -   Pasta toda de test
-    `python -m unittest discover ./tests`
+    `python -m unittest discover tests`
 
 # Requisitos Técnicos
 
