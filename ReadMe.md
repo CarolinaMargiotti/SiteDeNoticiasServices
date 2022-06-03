@@ -32,7 +32,11 @@ Essa é a versão do usuario em que qualquer um pode ler as noticias.
 
 `pip install -r requirements.txt`
 
-5. Rodar app
+5. Instalar separadamente Mariadb
+
+`mariadb==1.0.11`
+
+6. Rodar app
 
 `python server.py`
 
